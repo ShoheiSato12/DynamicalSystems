@@ -17,8 +17,8 @@ std::vector<double> quantumPendulum(std::vector<double> coord, double gamma)
     double f = flutuation(coord[0],coord[1], gamma);
     coord_dot[0] = coord[2];
     coord_dot[1] = coord[3];
-    coord_dot[2] = - gamma*coord[2] -coord[0] - coord[0]*coord[1]*coord[1] + f*rand();
-    coord_dot[3] = -gamma*coord[3] - coord[1]- coord[1]*coord[0]*coord[0]+f*rand();
+    coord_dot[2] = -gamma*coord[2] - coord[0] - coord[0]*coord[1]*coord[1] + f*rand();
+    coord_dot[3] = -gamma*coord[3] - coord[1] - coord[1]*coord[0]*coord[0] + f*rand();
 
     return coord_dot; 
 }

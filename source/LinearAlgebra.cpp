@@ -111,8 +111,7 @@ std::vector<std::vector<double>> identityMatrix(uint order)
         id[i][i] = 1.0;
     }
     return id;
-}
-   
+}  
 std::vector<std::vector<double>> matMult(std::vector<std::vector<double>>& leftMatrix, std::vector<std::vector<double>>& rigthMatrix) 
 {
     std::vector<std::vector<double>> result (leftMatrix.size(),std::vector<double>(rigthMatrix[0].size(),0));
@@ -128,3 +127,28 @@ std::vector<std::vector<double>> matMult(std::vector<std::vector<double>>& leftM
     return result;
  
 }
+std::vector<std::vector<double>> matSum(std::vector<std::vector<double>>& leftMatrix, std::vector<std::vector<double>>& rigthMatrix)
+{
+    std::vector<std::vector<double>> result (leftMatrix.size(),std::vector<double> (leftMatrix.size(),0));
+    for(uint i=0; i<leftMatrix.size();i++)
+    {
+        for(uint j=0;j<leftMatrix[0].size();j++)
+        {
+            result[i][j]=leftMatrix[i][j]+rigthMatrix[i][j];
+        }
+    }
+    return result;
+}
+std::vector<std::vector<double>> scalarXmat(double num,std::vector<std::vector<double>> matrix)
+{
+    std::vector<std::vector<double>> result(matrix.size(),std::vector<double>(matrix[0].size(),0));
+    for(uint i=0;i<matrix.size();i++)
+    {
+        for(uint j=0;j<matrix[0].size();j++)
+        {
+            result[i][j]=num*matrix[i][j];
+        }
+    }
+    return result;
+}
+

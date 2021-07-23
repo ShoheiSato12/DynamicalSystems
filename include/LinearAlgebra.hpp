@@ -21,6 +21,7 @@ std::vector<double>  sumOfProjections(uint position, std::vector<std::vector<dou
 
 std::vector<std::vector<double>> matMult(std::vector<std::vector<double>>& leftMatrix, std::vector<std::vector<double>>& rigthMatrix);
 std::vector<std::vector<double>> identityMatrix(uint order);
-
+std::vector<std::vector<double>> matSum(std::vector<std::vector<double>>& leftMatrix, std::vector<std::vector<double>>& rigthMatrix);
+std::vector<std::vector<double>> scalarXmat(double num,std::vector<std::vector<double>> matrix);
 
 #endif
