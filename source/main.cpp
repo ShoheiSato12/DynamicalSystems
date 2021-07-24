@@ -12,13 +12,17 @@
 
 int main()
 {
-    std::vector<double> integrationAux = {1.0,2.0,3.0,1.0};
-    double parameter = 2.0;
-    std::vector<long double> lya = lyapunovSpectrum(classicalPendulum, classicalPendulumJacobian, integrationAux, 0.001, parameter);
-    // std::vector<std::vector<double>> A = matMult(M,N);
-    std::cout<<"lyapunov exponents: "<<(lya[0])<<", "<<(lya[1])<<", "<<(lya[2])<<"\n ";
-    std::cout<<"lyapunov numbers: "<<exp(lya[0])<<", "<<exp(lya[1])<<", "<<exp(lya[2])<<"\n ";
+    std::vector<double> integrationAux = {6.0,1.0,0.0,1.0};
+    double parameter = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        parameter += 0.0001;
+        std::vector<long double> lya = lyapunovSpectrum(quantumPendulum, quantumPendulumJacobian, integrationAux, 0.001, parameter);
+        // std::vector<std::vector<double>> A = matMult(M,N);
+        std::cout<<"lyapunov exponents: "<<(lya[0])<<", "<<(lya[1])<<", "<<(lya[2])<<"\n ";
+        std::cout<<"lyapunov numbers: "<<exp(lya[0])<<", "<<exp(lya[1])<<", "<<exp(lya[2])<<"\n ";
 
-    std::cout<<"sum of lyapunov exponents: "<< lya[0] + lya[1] + lya[2];
+        std::cout<<"sum of lyapunov exponents: "<< lya[0] + lya[1] + lya[2];
+    }
     return 0;    
 }
