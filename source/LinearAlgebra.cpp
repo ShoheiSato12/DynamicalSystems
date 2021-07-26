@@ -1,6 +1,6 @@
 #include "../include/LinearAlgebra.hpp"
 #include<iostream>
-inline long double dotProduct(std::vector<double> &v1, std::vector<double> &v2)
+inline long double dotProduct(std::vector<long double> &v1, std::vector<long double> &v2)
 {
     long double result =  0;
     for(uint i = 0; i < v1.size(); i++)
@@ -9,15 +9,15 @@ inline long double dotProduct(std::vector<double> &v1, std::vector<double> &v2)
     }
     return result;
 }
-long double normOf(std::vector<double> &vec)
+long double normOf(std::vector<long double> &vec)
 {
     return sqrt(dotProduct(vec,vec));
 }
-inline double normSquare(std::vector<double> &vec)
+inline double normSquare(std::vector<long double> &vec)
 {
     return dotProduct(vec,vec);
 }
-inline void normalize(std::vector<double> &vec)
+inline void normalize(std::vector<long double> &vec)
 {
     double norm = normOf(vec);
     for(uint i = 0; i < vec.size(); i ++)
@@ -25,19 +25,19 @@ inline void normalize(std::vector<double> &vec)
         vec[i]/=norm;
     }
 }
-std::vector<double> projectionIntoU(std::vector<double> vectorV,std::vector<double> vectorU)
+std::vector<long double> projectionIntoU(std::vector<long double> vectorV,std::vector<long double> vectorU)
 {
     double coef =  dotProduct(vectorU,vectorV)*(1.0/normSquare(vectorU));
-    std::vector<double> proj (vectorU.size());
+    std::vector<long double> proj (vectorU.size());
     for(uint i = 0; i < vectorU.size(); i++)
     {
         proj[i] = coef * vectorU[i];
     }
     return proj;
 }
- std::vector<double>  sumOfProjections(uint position, std::vector<std::vector<double>>& matrix)
+ std::vector<long double>  sumOfProjections(uint position, std::vector<std::vector<long double>>& matrix)
 {
-    std::vector<double>  sum(matrix[0].size(),0);
+    std::vector<long double>  sum(matrix[0].size(),0);
     
     for(uint i = 0; i < position; i++)
     {
@@ -55,9 +55,9 @@ std::vector<double> projectionIntoU(std::vector<double> vectorV,std::vector<doub
     }
     return sum;
 }
-void transpostSquare(std::vector<std::vector<double>>& matrix)
+void transpostSquare(std::vector<std::vector<long double>>& matrix)
 {
-    std::vector<std::vector<double>> aux = matrix; 
+    std::vector<std::vector<long double>> aux = matrix; 
     for(uint i = 0; i < matrix.size(); i++)
     {
         for(uint j = 0; j < matrix[0].size(); j++)
@@ -67,7 +67,7 @@ void transpostSquare(std::vector<std::vector<double>>& matrix)
     }
   
 }
-void gramSchmidt(std::vector<std::vector<double>>& matrix)
+void gramSchmidt(std::vector<std::vector<long double>>& matrix)
 {
     
     for(uint i = 1; i < matrix[0].size(); i ++)
@@ -75,10 +75,10 @@ void gramSchmidt(std::vector<std::vector<double>>& matrix)
         matrix[i] = sumOfProjections(i, matrix);     
     }
 }
-void gramSchmidtNormal(std::vector<std::vector<double>>& matrix)
+void gramSchmidtNormal(std::vector<std::vector<long double>>& matrix)
 {
     gramSchmidt(matrix);
-    std::vector<double> norms (matrix.size());
+    std::vector<long double> norms (matrix.size());
     for(uint j = 0; j < matrix.size(); j++)
     {
         norms[j] = normOf(matrix[j]);
@@ -92,7 +92,7 @@ void gramSchmidtNormal(std::vector<std::vector<double>>& matrix)
         }
     }
 }
-void printMatrix(std::vector<std::vector<double>>& matrix)
+void printMatrix(std::vector<std::vector<long double>>& matrix)
 {
     for(uint i = 0; i < matrix.size(); i++)
     {
@@ -103,18 +103,18 @@ void printMatrix(std::vector<std::vector<double>>& matrix)
         std::cout<<"\n";
     }
 }
-std::vector<std::vector<double>> identityMatrix(uint order)
+std::vector<std::vector<long double>> identityMatrix(uint order)
 {
-    std::vector<std::vector<double>> id (order, std::vector<double>(order,0));
+    std::vector<std::vector<long double>> id (order, std::vector<long double>(order,0));
     for(uint i = 0; i < order; i++)
     {
         id[i][i] = 1.0;
     }
     return id;
 }  
-std::vector<std::vector<double>> matMult(std::vector<std::vector<double>>& leftMatrix, std::vector<std::vector<double>>& rigthMatrix) 
+std::vector<std::vector<long double>> matMult(std::vector<std::vector<long double>>& leftMatrix, std::vector<std::vector<long double>>& rigthMatrix) 
 {
-    std::vector<std::vector<double>> result (leftMatrix.size(),std::vector<double>(rigthMatrix[0].size(),0));
+    std::vector<std::vector<long double>> result (leftMatrix.size(),std::vector<long double>(rigthMatrix[0].size(),0));
 
    
     for (uint i = 0; i < leftMatrix.size(); i++) {
@@ -127,9 +127,9 @@ std::vector<std::vector<double>> matMult(std::vector<std::vector<double>>& leftM
     return result;
  
 }
-std::vector<std::vector<double>> matSum(std::vector<std::vector<double>>& leftMatrix, std::vector<std::vector<double>>& rigthMatrix)
+std::vector<std::vector<long double>> matSum(std::vector<std::vector<long double>>& leftMatrix, std::vector<std::vector<long double>>& rigthMatrix)
 {
-    std::vector<std::vector<double>> result (leftMatrix.size(),std::vector<double> (leftMatrix.size(),0));
+    std::vector<std::vector<long double>> result (leftMatrix.size(),std::vector<long double> (leftMatrix.size(),0));
     for(uint i=0; i<leftMatrix.size();i++)
     {
         for(uint j=0;j<leftMatrix[0].size();j++)
@@ -139,9 +139,9 @@ std::vector<std::vector<double>> matSum(std::vector<std::vector<double>>& leftMa
     }
     return result;
 }
-std::vector<std::vector<double>> scalarXmat(double num,std::vector<std::vector<double>> matrix)
+std::vector<std::vector<long double>> scalarXmat(double num,std::vector<std::vector<long double>> matrix)
 {
-    std::vector<std::vector<double>> result(matrix.size(),std::vector<double>(matrix[0].size(),0));
+    std::vector<std::vector<long double>> result(matrix.size(),std::vector<long double>(matrix[0].size(),0));
     for(uint i=0;i<matrix.size();i++)
     {
         for(uint j=0;j<matrix[0].size();j++)

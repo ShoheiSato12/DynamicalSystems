@@ -1,18 +1,18 @@
 #include<time.h>
 #include "../include/system.hpp"
 //Lorenz
-std::vector<double> lorenz(std::vector<double> coord, double rho)
+std::vector<long double> lorenz(std::vector<long double> coord, double rho)
 {
-    std::vector<double> xcoord (3,0);
+    std::vector<long double> xcoord (3,0);
     double a=10,b=8/3;
     xcoord[0] = a*coord[1] - 10.0 * coord[0];
     xcoord[1] = rho*coord[0] - coord[1] - coord[0]*coord[2];
     xcoord[2] = coord[0]*coord[1] -b*coord[2];
     return xcoord;
 }
-std::vector<std::vector<double>> lorenzJacobian(std::vector<double>& coord,double rho)
+std::vector<std::vector<long double>> lorenzJacobian(std::vector<long double>& coord,double rho)
 {
-    std::vector<std::vector<double>> jacobian (3,std::vector<double>(3,0));
+    std::vector<std::vector<long double>> jacobian (3,std::vector<long double>(3,0));
     double a=10,b=8/3;
     jacobian[0][0] = -a; 
     jacobian[0][1] =  a;
@@ -26,9 +26,9 @@ std::vector<std::vector<double>> lorenzJacobian(std::vector<double>& coord,doubl
     return jacobian;
 }
 //Classical pendulum
-std::vector<double> classicalPendulum(std::vector<double> coord, double k)
+std::vector<long double> classicalPendulum(std::vector<long double> coord, double k)
 {
-    std::vector<double> coord_dot (4);
+    std::vector<long double> coord_dot (4);
     coord_dot[0] = coord[2];
     coord_dot[1] = coord[3];
     coord_dot[2] = -coord[0] - k*coord[0]*coord[1]*coord[1];
@@ -36,9 +36,9 @@ std::vector<double> classicalPendulum(std::vector<double> coord, double k)
     
     return coord_dot;
 }
-std::vector<std::vector<double>> classicalPendulumJacobian(std::vector<double> &coord, double k)
+std::vector<std::vector<long double>> classicalPendulumJacobian(std::vector<long double> &coord, double k)
 {
-    std::vector<std::vector<double>> jacobian (coord.size(),std::vector<double>(coord.size(),0));
+    std::vector<std::vector<long double>> jacobian (coord.size(),std::vector<long double>(coord.size(),0));
     jacobian[0] = {0, 0 , 1 , 0};
     jacobian[1] = {0 , 0 , 0 , 1};
     jacobian[2] = {-1-k*coord[1]*coord[1] , -2*k*coord[0]*coord[1] , 0 , 0};
@@ -46,9 +46,9 @@ std::vector<std::vector<double>> classicalPendulumJacobian(std::vector<double> &
     return jacobian;
 }
 //Quantum pendulum
-std::vector<double> quantumPendulum(std::vector<double> coord, double gamma)
+std::vector<long double> quantumPendulum(std::vector<long double> coord, double gamma)
 {
-    std::vector<double> coord_dot (4,0);
+    std::vector<long double> coord_dot (4,0);
     srand (time(NULL));
     double f = fluctuation(coord[0],coord[1], gamma);
     coord_dot[0] = coord[2];
@@ -58,11 +58,11 @@ std::vector<double> quantumPendulum(std::vector<double> coord, double gamma)
 
     return coord_dot; 
 }
-std::vector<std::vector<double>> quantumPendulumJacobian(std::vector<double> &coord, double gamma)
+std::vector<std::vector<long double>> quantumPendulumJacobian(std::vector<long double> &coord, double gamma)
 {
     srand (time(NULL));
     double f = fluctuation(coord[0],coord[1], gamma);
-    std::vector<std::vector<double>> jacobian (coord.size(),std::vector<double>(coord.size(),0));
+    std::vector<std::vector<long double>> jacobian (coord.size(),std::vector<long double>(coord.size(),0));
     jacobian[0] = {0 , 0 , 1 , 0};
     jacobian[1] = {0 , 0 , 0 , 1};
     jacobian[2] = {-1-coord[1]*coord[1]-gamma*coord[2]+f*rand() , -2*coord[0]*coord[1]-gamma*coord[2]+f*rand() , 0 , 0};

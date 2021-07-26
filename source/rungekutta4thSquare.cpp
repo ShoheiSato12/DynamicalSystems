@@ -1,14 +1,14 @@
 #include "../include/rungekutta4thSquare.hpp"
 
 
-std::vector<double> rungeKutta4thSquare(std::vector<double> (*function)(std::vector<double>, double), 
-                                  std::vector<double> &coord, double param, double step, 
+std::vector<long double> rungeKutta4thSquare(std::vector<long double> (*function)(std::vector<long double>, double), 
+                                  std::vector<long double> &coord, double param, double step, 
                                   int dimension )
 {
-    std::vector<double> k1 (dimension);
-    std::vector<double> k2 (dimension);
-    std::vector<double> k3 (dimension);
-    std::vector<double> k4 (dimension);
+    std::vector<long double> k1 (dimension);
+    std::vector<long double> k2 (dimension);
+    std::vector<long double> k3 (dimension);
+    std::vector<long double> k4 (dimension);
     
     k1 = function(coord, param);
     k2 = function(updateCoord(coord, k1, (double)step, 2.0,dimension), param);
@@ -20,14 +20,14 @@ std::vector<double> rungeKutta4thSquare(std::vector<double> (*function)(std::vec
     }
     return coord;
 }
-std::vector<double> rungeKutta4thSquarePertubation(std::vector<double> (*function)(std::vector<double>,std::vector<double>, double), 
-                                  std::vector<double> coord,std::vector<double> pertubation, double param, double step, 
-                                  int dimension, std::vector<double>& functionAval )
+std::vector<long double> rungeKutta4thSquarePertubation(std::vector<long double> (*function)(std::vector<long double>,std::vector<long double>, double), 
+                                  std::vector<long double> coord,std::vector<long double> pertubation, double param, double step, 
+                                  int dimension, std::vector<long double>& functionAval )
 {
-    std::vector<double> k1 (dimension);
-    std::vector<double> k2 (dimension);
-    std::vector<double> k3 (dimension);
-    std::vector<double> k4 (dimension);
+    std::vector<long double> k1 (dimension);
+    std::vector<long double> k2 (dimension);
+    std::vector<long double> k3 (dimension);
+    std::vector<long double> k4 (dimension);
     
     k1 = function(coord, pertubation, param);
     k2 = function(updateCoord(coord, k1, (double)step, 2.0,dimension), pertubation, param);
@@ -40,10 +40,10 @@ std::vector<double> rungeKutta4thSquarePertubation(std::vector<double> (*functio
     functionAval = k4;
     return coord;
 }
-std::vector<double> updateCoord(std::vector<double> coord, std::vector<double> increment, double step, double scale,int dimension)
+std::vector<long double> updateCoord(std::vector<long double> coord, std::vector<long double> increment, double step, double scale,int dimension)
 {
     
-    std::vector<double> updatedCoord (dimension);
+    std::vector<long double> updatedCoord (dimension);
     for(int i = 0; i < dimension; i++)
     {
         updatedCoord[i] = coord[i] + ((double)step/(double)scale)*(increment[i]);
@@ -51,13 +51,13 @@ std::vector<double> updateCoord(std::vector<double> coord, std::vector<double> i
     return updatedCoord;
 }
 
-void completeRungeKuttaToFile(std::vector<double> (*function)(std::vector<double>, double), std::vector<double> initialCond,
+void completeRungeKuttaToFile(std::vector<long double> (*function)(std::vector<long double>, double), std::vector<long double> initialCond,
                                                    double param, double step, int dimension, double time_span[2])
 {
     int iterations = (int)(fabs(time_span[1]-time_span[0])/step);
     std::ofstream fileName;
     fileName.open("ouputrk4th.dat");
-    //std::vector<double> auxVec = rungeKutta4thSquare(function, initialCond, param, step, dimension);
+    //std::vector<long double> auxVec = rungeKutta4thSquare(function, initialCond, param, step, dimension);
     for(int j = 0; j < iterations; j++)
     {
         initialCond = rungeKutta4thSquare(function, initialCond, param, step, dimension);

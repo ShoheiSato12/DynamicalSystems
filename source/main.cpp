@@ -12,18 +12,18 @@
 
 int main()
 {
-    std::vector<double> integrationAux = {6.0,1.0,0.0,1.0};
+    std::vector<long double> integrationAux = {6.0,1.0,0.0,1.0};
     double parameter = 0;
     for (int i = 0; i < 10; i++)
     {
         std::vector<long double> lya = lyapunovSpectrum(quantumPendulum, quantumPendulumJacobian, integrationAux, 0.001, parameter);
-        // std::vector<std::vector<double>> A = matMult(M,N);
+        // std::vector<std::vector<long double>> A = matMult(M,N);
         std::cout << "--- Gamma = " << parameter << "---------" << std::endl;
         std::cout << "lyapunov exponents: " << (lya[0]) << ", " << (lya[1]) << ", " << (lya[2]) << "\n ";
         std::cout<<"lyapunov numbers: "<<exp(lya[0])<<", "<<exp(lya[1])<<", "<<exp(lya[2])<<"\n ";
 
-        std::cout<<"sum of lyapunov exponents: "<< lya[0] + lya[1] + lya[2];
-        parameter += 0.0001;
+        std::cout<<"sum of lyapunov exponents: "<< lya[0] + lya[1] + lya[2]<<std::endl;
+        parameter += 0.00001;
     }
     return 0;    
 }

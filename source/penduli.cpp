@@ -1,8 +1,8 @@
 #include "../include/penduli.hpp"
 
-std::vector<double> classicalPendulum(std::vector<double> coord, double k)
+std::vector<long double> classicalPendulum(std::vector<long double> coord, double k)
 {
-    std::vector<double> coord_dot (4);
+    std::vector<long double> coord_dot (4);
     coord_dot[0] = coord[2];
     coord_dot[1] = coord[3];
     coord_dot[2] = -coord[0] - k*coord[0]*coord[1]*coord[1];
@@ -10,9 +10,9 @@ std::vector<double> classicalPendulum(std::vector<double> coord, double k)
     
     return coord_dot;
 }
-std::vector<double> quantumPendulum(std::vector<double> coord, double gamma)
+std::vector<long double> quantumPendulum(std::vector<long double> coord, double gamma)
 {
-    std::vector<double> coord_dot (4,0);
+    std::vector<long double> coord_dot (4,0);
     srand (time(NULL));
     double f = flutuation(coord[0],coord[1], gamma);
     coord_dot[0] = coord[2];

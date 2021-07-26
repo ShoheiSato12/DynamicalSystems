@@ -1,21 +1,21 @@
 #include "../include/biffurcation.hpp"
 
 
-std::vector<std::vector<double>> biffurcation(std::vector<double>(*function)(std::vector<double>, double),
-                                            double paramRange[2], std::vector<double> initialCond, 
+std::vector<std::vector<long double>> biffurcation(std::vector<long double>(*function)(std::vector<long double>, double),
+                                            double paramRange[2], std::vector<long double> initialCond, 
                                             double paramStep, double integrationStep, double step, int systemDimension)
 {
 
     int paramIterations = (int)((fabs(paramRange[1]-paramRange[0])/paramStep));
     int integrationIterations = (int)((double)10.0/integrationStep);
-    std::vector<std::vector<double>> biffurcation (4);
-    std::vector<std::vector<double>> auxCoord(integrationIterations);
+    std::vector<std::vector<long double>> biffurcation (4);
+    std::vector<std::vector<long double>> auxCoord(integrationIterations);
     auxCoord[0]= initialCond;
 
-    std::vector<double> param (paramIterations,0);
-    std::vector<double>::iterator paramValue;
-    std::vector<double> xCoord (integrationIterations-1,0);
-    std::vector<double> auxIntegration;
+    std::vector<long double> param (paramIterations,0);
+    std::vector<long double>::iterator paramValue;
+    std::vector<long double> xCoord (integrationIterations-1,0);
+    std::vector<long double> auxIntegration;
 
     for(int i = 0; i < paramIterations; i++)
     {

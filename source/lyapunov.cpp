@@ -2,19 +2,19 @@
 #include "../include/LyapExp.hpp"
 #include "../include/LinearAlgebra.hpp"
 #include <iostream>
-std::vector<long double> lyapunovSpectrum(std::vector<double> (*function)(std::vector<double>, double),
-                                std::vector<std::vector<double>> (*jacobian)(std::vector<double>&,double), 
-                                std::vector<double>& initialCond, double step, double param)
+std::vector<long double> lyapunovSpectrum(std::vector<long double> (*function)(std::vector<long double>, double),
+                                std::vector<std::vector<long double>> (*jacobian)(std::vector<long double>&,double), 
+                                std::vector<long double>& initialCond, double step, double param)
 {
     // double step = 0.001;
     uint iterations = (uint)(100.0/step);
-    std::vector<double> coord = initialCond;
+    std::vector<long double> coord = initialCond;
     std::vector<long double> lyapunovExponents (initialCond.size(),0);
 
-    std::vector<std::vector<double>> I=identityMatrix(initialCond.size());
-    std::vector<std::vector<double>> w=I;  
-    std::vector<std::vector<double>> J;
-    std::vector<std::vector<double>> auxJ(initialCond.size(),std::vector<double> (initialCond.size(),0));
+    std::vector<std::vector<long double>> I=identityMatrix(initialCond.size());
+    std::vector<std::vector<long double>> w=I;  
+    std::vector<std::vector<long double>> J;
+    std::vector<std::vector<long double>> auxJ(initialCond.size(),std::vector<long double> (initialCond.size(),0));
     for(uint i = 0; i < 100; i++)
     {
         coord = rungeKutta4thSquare(function, coord, param, step, initialCond.size());

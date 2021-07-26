@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include<iostream>
 
-std::vector<long double> lyapunovSpectrum(std::vector<double> (*function)(std::vector<double>, double),
-                                std::vector<std::vector<double>> (*jacobian)(std::vector<double>&,double), 
-                                std::vector<double>& initalCond, double step, double param);
+std::vector<long double> lyapunovSpectrum(std::vector<long double> (*function)(std::vector<long double>, double),
+                                std::vector<std::vector<long double>> (*jacobian)(std::vector<long double>&,double), 
+                                std::vector<long double>& initalCond, double step, double param);
 #endif
